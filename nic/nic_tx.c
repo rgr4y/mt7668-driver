@@ -2371,7 +2371,7 @@ VOID nicTxProcessTxDoneEvent(IN P_ADAPTER_T prAdapter, IN P_WIFI_EVENT_T prEvent
 {
 	P_EVENT_TX_DONE_T prTxDone;
 	P_MSDU_INFO_T prMsduInfo;
-	PUINT_8 apucBandwidt[4] = {(PUINT_8)"20", (PUINT_8)"40", (PUINT_8)"80", (PUINT_8)"160/80+80"};
+	PUINT_8 apucBandwidt[4] __maybe_unused = {(PUINT_8)"20", (PUINT_8)"40", (PUINT_8)"80", (PUINT_8)"160/80+80"};
 
 	prTxDone = (P_EVENT_TX_DONE_T) (prEvent->aucBuffer);
 

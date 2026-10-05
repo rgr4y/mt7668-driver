@@ -3692,7 +3692,7 @@ VOID wlanSetChipEcoInfo(IN P_ADAPTER_T prAdapter)
 {
 	UINT_32 hw_version, sw_version = 0;
 	struct mt66xx_chip_info *prChipInfo = prAdapter->chip_info;
-	UINT_32 chip_id = prChipInfo->chip_id;
+	UINT_32 chip_id __maybe_unused = prChipInfo->chip_id;
 	/* WLAN_STATUS status; */
 
 	DEBUGFUNC("wlanSetChipEcoInfo.\n");

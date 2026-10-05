@@ -246,7 +246,7 @@ WLAN_STATUS authSendAuthFrame(IN P_ADAPTER_T prAdapter, IN P_STA_RECORD_T prStaR
 
 	    /* Compose Header and some Fixed Fields */
 	    authComposeAuthFrameHeaderAndFF((PUINT_8)
-					    ((UINT_32) (prMsduInfo->prPacket) +
+					    ((ULONG) (prMsduInfo->prPacket) +
 					     MAC_TX_RESERVED_FIELD), prStaRec->aucMacAddr,
 					    prBssInfo->aucOwnMacAddr, prStaRec->ucAuthAlgNum,
 					    u2TransactionSeqNum, STATUS_CODE_RESERVED);

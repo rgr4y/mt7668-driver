@@ -39,6 +39,7 @@ ccflags-y += -DDBG=0
 # wedged chip would take down the whole kernel. Vendor/Armbian builds ship
 # this at 0, where a failed assert degrades to a recoverable driver error.
 ccflags-y += -DBUILD_QA_DBG=0
+ccflags-y += -Wno-error -Wno-format
 ccflags-y += -DCFG_BUILT_IN_DRIVER=0
 ccflags-y += -DCFG_SUPPORT_DEBUG_FS=0
 ccflags-y += -DWLAN_INCLUDE_PROC

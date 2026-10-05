@@ -1502,14 +1502,15 @@ p2pFuncBeaconUpdate(IN P_ADAPTER_T prAdapter,
 	P_BSS_INFO_T prP2pBssInfo = (P_BSS_INFO_T) NULL;
 	P_MSDU_INFO_T prBcnMsduInfo = (P_MSDU_INFO_T) NULL;
 	PUINT_8 pucTIMBody = (PUINT_8) NULL;
-	UINT_16 u2FrameLength = 0, UINT_16 u2OldBodyLen = 0;
+	UINT_16 u2FrameLength = 0, u2OldBodyLen = 0;
 	UINT_8 aucIEBuf[MAX_IE_LENGTH];
 
 	do {
 		ASSERT_BREAK(prAdapter != NULL);
 
 		prP2pBssInfo = &(prAdapter->rWifiVar.arBssInfo[NETWORK_TYPE_P2P_INDEX]);
-		prBcnMsduInfo = prP2pBssInfo->prBeacon ASSERT_BREAK(prBcnMsduInfo != NULL);
+		prBcnMsduInfo = prP2pBssInfo->prBeacon;
+		ASSERT_BREAK(prBcnMsduInfo != NULL);
 
 		/* TODO: Find TIM IE pointer. */
 		prBcnFrame = prBcnMsduInfo->prPacket;
@@ -1535,13 +1536,13 @@ p2pFuncBeaconUpdate(IN P_ADAPTER_T prAdapter,
 				pucTIMBody = pucIEBuf;
 
 			/* Body not change. */
-			u2OldBodyLen = (UINT_16) ((UINT_32) pucTIMBody - (UINT_32) prBcnFrame->aucInfoElem);
+			u2OldBodyLen = (UINT_16) ((ULONG) pucTIMBody - (ULONG) prBcnFrame->aucInfoElem);
 			/* Move body. */
 			kalMemCmp(aucIEBuf, pucTIMBody, u2OldBodyLen);
 		} while (FALSE);
 		if (pucBcnHdr) {
 			kalMemCopy(prBcnMsduInfo->prPacket, pucBcnHdr, u4HdrLen);
-			pucTIMBody = (PUINT_8) ((UINT_32) prBcnMsduInfo->prPacket + u4HdrLen);
+			pucTIMBody = (PUINT_8) ((ULONG) prBcnMsduInfo->prPacket + u4HdrLen);
 			prBcnMsduInfo->ucMacHeaderLength =
 			    (WLAN_MAC_MGMT_HEADER_LEN +
 			     (TIMESTAMP_FIELD_LEN + BEACON_INTERVAL_FIELD_LEN + CAP_INFO_FIELD_LEN));
@@ -1604,13 +1605,13 @@ p2pFuncBeaconUpdate(IN P_ADAPTER_T prAdapter,
 
 #if DBG
 		if (prBcnUpdateInfo->pucBcnHdr != NULL) {
-			ASSERT((UINT_32) prBcnUpdateInfo->pucBcnHdr ==
-			       ((UINT_32) prBcnMsduInfo->prPacket + MAC_TX_RESERVED_FIELD));
+			ASSERT((ULONG) prBcnUpdateInfo->pucBcnHdr ==
+			       ((ULONG) prBcnMsduInfo->prPacket + MAC_TX_RESERVED_FIELD));
 		}
 
 		if (prBcnUpdateInfo->pucBcnBody != NULL) {
-			ASSERT((UINT_32) prBcnUpdateInfo->pucBcnBody ==
-			       ((UINT_32) prBcnUpdateInfo->pucBcnHdr + (UINT_32) prBcnUpdateInfo->u4BcnHdrLen));
+			ASSERT((ULONG) prBcnUpdateInfo->pucBcnBody ==
+			       ((ULONG) prBcnUpdateInfo->pucBcnHdr + (ULONG) prBcnUpdateInfo->u4BcnHdrLen));
 		}
 #endif
 		prBcnFrame = (P_WLAN_BEACON_FRAME_T) ((ULONG) prBcnMsduInfo->prPacket + MAC_TX_RESERVED_FIELD);
@@ -3422,7 +3423,7 @@ P_MSDU_INFO_T p2pFuncProcessP2pProbeRsp(IN P_ADAPTER_T prAdapter, IN UINT_8 ucBs
 #if 0
 		if (prAdapter->prGlueInfo->prP2PInfo[0]->u2VenderIELen > 0) {
 			kalMemCopy((PUINT_8)
-				   ((UINT_32) prRetMsduInfo->prPacket +
+				   ((ULONG) prRetMsduInfo->prPacket +
 				    (UINT_32) prRetMsduInfo->u2FrameLength),
 				   prAdapter->prGlueInfo->prP2PInfo[0]->aucVenderIE,
 				   prAdapter->prGlueInfo->prP2PInfo[0]->u2VenderIELen);
@@ -3554,7 +3555,7 @@ VOID p2pFuncGenerateExtra_IEForBeacon(IN P_ADAPTER_T prAdapter, IN P_MSDU_INFO_T
 		if (p2pFuncIsAPMode(prAdapter->rWifiVar.prP2pFsmInfo))
 			break;
 
-		pucIEBuf = (PUINT_8) ((UINT_32) prMsduInfo->prPacket + (UINT_32) prMsduInfo->u2FrameLength);
+		pucIEBuf = (PUINT_8) ((ULONG) prMsduInfo->prPacket + (UINT_32) prMsduInfo->u2FrameLength);
 
 		kalMemCopy(pucIEBuf, prP2pSpeBssInfo->aucBeaconIECache, prP2pSpeBssInfo->u2IELenForBCN);
 

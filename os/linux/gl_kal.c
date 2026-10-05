@@ -144,8 +144,8 @@ WLAN_STATUS kalFirmwareOpen(IN P_GLUE_INFO_T prGlueInfo, IN PPUINT_8 apucNameTab
 {
 	UINT_8 ucNameIdx;
 	/* PPUINT_8 apucNameTable; */
-	UINT_8 ucMaxEcoVer = (sizeof(appucFwNameTable) / sizeof(PPUINT_8));
-	UINT_8 ucCurEcoVer = wlanGetEcoVersion(prGlueInfo->prAdapter);
+	UINT_8 ucMaxEcoVer __maybe_unused = (sizeof(appucFwNameTable) / sizeof(PPUINT_8));
+	UINT_8 ucCurEcoVer __maybe_unused = wlanGetEcoVersion(prGlueInfo->prAdapter);
 	BOOLEAN fgResult = FALSE;
 	int ret;
 

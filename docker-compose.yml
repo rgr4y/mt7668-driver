@@ -1,0 +1,16 @@
+services:
+  build:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    platform: linux/arm64
+    environment:
+      KVER: 6.12.111-ophub
+    volumes:
+      - .:/src
+    command:
+      - sh
+      - -c
+      - >
+        make -C /src/usr/src/linux-headers-${KVER:-6.12.111-ophub}
+        M=/src ARCH=arm64 modules

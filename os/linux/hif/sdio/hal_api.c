@@ -1260,7 +1260,6 @@ VOID halRxSDIOAggReceiveRFBs(IN P_ADAPTER_T prAdapter)
 	UINT_32 i, rxNum;
 	UINT_32 u4RxAggCount = 0, u4RxAggLength = 0;
 	UINT_32 u4RxAvailAggLen;
-	PUINT_8 pucSrcAddr;
 	UINT_16 u2RxPktNum;
 	P_GL_HIF_INFO_T prHifInfo;
 	P_SDIO_RX_COALESCING_BUF_T prRxBuf;

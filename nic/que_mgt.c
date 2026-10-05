@@ -5151,7 +5151,7 @@ mqmSendDelBaFrame(IN P_ADAPTER_T prAdapter,
 	prBssInfo = GET_BSS_INFO_BY_INDEX(prAdapter, prStaRec->ucBssIndex);
 
 	/* Fill the Action frame */
-	prDelBaFrame = (P_ACTION_DELBA_FRAME_T) ((UINT_32) (prTxMsduInfo->prPacket) + MAC_TX_RESERVED_FIELD);
+	prDelBaFrame = (P_ACTION_DELBA_FRAME_T) ((ULONG) (prTxMsduInfo->prPacket) + MAC_TX_RESERVED_FIELD);
 	prDelBaFrame->u2FrameCtrl = MAC_FRAME_ACTION;
 #if CFG_SUPPORT_802_11W
 	if (rsnCheckBipKeyInstalled(prAdapter, prStaRec)) {
@@ -5664,7 +5664,7 @@ VOID mqmHandleAddBaReq(IN P_ADAPTER_T prAdapter, IN P_SW_RFB_T prSwRfb)
 		}
 
 		/* Fill the ADDBA_RSP message */
-		prAddBaRsp = (P_ACTION_ADDBA_RSP_FRAME_T) ((UINT_32) (prTxMsduInfo->prPacket) + MAC_TX_RESERVED_FIELD);
+		prAddBaRsp = (P_ACTION_ADDBA_RSP_FRAME_T) ((ULONG) (prTxMsduInfo->prPacket) + MAC_TX_RESERVED_FIELD);
 		prAddBaRsp->u2FrameCtrl = MAC_FRAME_ACTION;
 
 #if CFG_SUPPORT_802_11W

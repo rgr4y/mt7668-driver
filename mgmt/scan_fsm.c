@@ -66,7 +66,7 @@ UINT_8 g_aucScanChannelNum[SCN_SCAN_DONE_PRINT_BUFFER_LENGTH];
 UINT_8 g_aucScanChannelIdleTime[SCN_SCAN_DONE_PRINT_BUFFER_LENGTH];
 UINT_8 g_aucScanChannelMDRDY[SCN_SCAN_DONE_PRINT_BUFFER_LENGTH];
 
-static PUINT_8 apucDebugScanState[SCAN_STATE_NUM] = {
+static PUINT_8 apucDebugScanState[SCAN_STATE_NUM] __maybe_unused = {
 	(PUINT_8) DISP_STRING("IDLE"),
 	(PUINT_8) DISP_STRING("SCANNING"),
 };

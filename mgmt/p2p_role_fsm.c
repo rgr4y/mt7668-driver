@@ -55,7 +55,7 @@
 
 #if 1
 /*lint -save -e64 Type mismatch */
-static PUINT_8 apucDebugP2pRoleState[P2P_ROLE_STATE_NUM] = {
+static PUINT_8 apucDebugP2pRoleState[P2P_ROLE_STATE_NUM] __maybe_unused = {
 	(PUINT_8) DISP_STRING("P2P_ROLE_STATE_IDLE"),
 	(PUINT_8) DISP_STRING("P2P_ROLE_STATE_SCAN"),
 	(PUINT_8) DISP_STRING("P2P_ROLE_STATE_REQING_CHANNEL"),
@@ -492,11 +492,17 @@ p2pRoleFsmDeauhComplete(IN P_ADAPTER_T prAdapter, IN P_STA_RECORD_T prStaRec)
 	DBGLOG(P2P, INFO, "Deauth TX Complete!\n");
 
 	prP2pBssInfo = prAdapter->aprBssInfo[prStaRec->ucBssIndex];
-	ASSERT_BREAK(prP2pBssInfo != NULL);
+	if (!prP2pBssInfo) {
+		DBGLOG(P2P, ERROR, "prP2pBssInfo shouldn't be NULL!\n");
+		return;
+	}
 	eOriMediaStatus = prP2pBssInfo->eConnectionState;
 	prP2pRoleFsmInfo = P2P_ROLE_INDEX_2_ROLE_FSM_INFO(prAdapter, prP2pBssInfo->u4PrivateData);
 
-	ASSERT_BREAK(prP2pRoleFsmInfo != NULL);
+	if (!prP2pRoleFsmInfo) {
+		DBGLOG(P2P, ERROR, "prP2pRoleFsmInfo shouldn't be NULL!\n");
+		return;
+	}
 
 	/* Change station state. */
 	cnmStaRecChangeState(prAdapter, prStaRec, STA_STATE_1);

@@ -1920,10 +1920,10 @@ BOOLEAN rlmDomainGetTxPwrLimit(u32 country_code,
 	}
 
 	kalMemFree(pTxPwrLimit->rChannelTxPwrLimit, VIR_MEM_TYPE,
-		sizeof(CHANNEL_TX_PWR_LIMIT) * pTxPwrLimit->ucChNum);
+		sizeof(struct CHANNEL_TX_PWR_LIMIT) * pTxPwrLimit->ucChNum);
 
 error:
-	kalMemFree(pTxPwrLimit, VIR_MEM_TYPE, sizeof(TX_PWR_LIMIT_DATA));
+	kalMemFree(pTxPwrLimit, VIR_MEM_TYPE, sizeof(struct TX_PWR_LIMIT_DATA));
 
 	return bRet;
 }
@@ -2754,7 +2754,7 @@ void rlmDomainSetTempCountryCode(char *alpha2, u8 size_of_alpha2)
 enum regd_state rlmDomainStateTransition(enum regd_state request_state, struct regulatory_request *pRequest)
 {
 	enum regd_state next_state, old_state;
-	bool the_same = 0;
+	bool the_same __maybe_unused = 0;
 
 	old_state = g_mtk_regd_control.state;
 	next_state = REGD_STATE_INVALID;

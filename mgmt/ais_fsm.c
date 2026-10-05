@@ -68,7 +68,7 @@
 #define AIS_FSM_STATE_SEARCH_ACTION_PHASE_1	1
 #define AIS_FSM_STATE_SEARCH_ACTION_PHASE_2	2
 
-static PUINT_8 apucDebugAisState[AIS_STATE_NUM] = {
+static PUINT_8 apucDebugAisState[AIS_STATE_NUM] __maybe_unused = {
 	(PUINT_8) DISP_STRING("IDLE"),
 	(PUINT_8) DISP_STRING("SEARCH"),
 	(PUINT_8) DISP_STRING("SCAN"),

@@ -61,7 +61,7 @@
 
 #include "precomp.h"
 
-static PUINT_8 apucDebugAAState[AA_STATE_NUM] = {
+static PUINT_8 apucDebugAAState[AA_STATE_NUM] __maybe_unused = {
 	(PUINT_8) DISP_STRING("AA_IDLE"),
 	(PUINT_8) DISP_STRING("SAA_SEND_AUTH1"),
 	(PUINT_8) DISP_STRING("SAA_WAIT_AUTH2"),

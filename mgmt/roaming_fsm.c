@@ -63,7 +63,7 @@
 
 #if CFG_SUPPORT_ROAMING
 
-static PUINT_8 apucDebugRoamingState[ROAMING_STATE_NUM] = {
+static PUINT_8 apucDebugRoamingState[ROAMING_STATE_NUM] __maybe_unused = {
 	(PUINT_8) DISP_STRING("IDLE"),
 	(PUINT_8) DISP_STRING("DECISION"),
 	(PUINT_8) DISP_STRING("DISCOVERY"),
